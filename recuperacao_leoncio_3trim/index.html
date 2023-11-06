@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECUPERAÇÃO FRONT-END</title>
+</head>
+
+<body>
+    <!--título do site-->
+    <h1 class="titulo">INTERESSADOS NO CAMPEONATO DE BASQUETE 3X3</h1>
+    <!--botão que chama uma função quando é clicado-->
+    <button class="botao" type="button" onclick="InscreverEstudante()">Inscrever novo estudante</button>
+
+    <!--resultados-->
+    <p class="interessados">Interessados: Classe A <span id="contadorA">0</span>, Classe B <span id="contadorB">0</span></p>
+    <p class="equipes">Equipes formadas: Classe A: 0, Classe B: 0</p>
+
+    <script>
+        var interessadosA = [];
+        var interessadosB = [];
+        var qtdInteressadosA = 0;
+        var qtdInteressadosB = 0;
+
+        function InscreverEstudante() {
+            var nomeEstudante = prompt("Digite o nome do estudante:");
+            var idadeEstudante = parseInt(prompt("Digite a idade do estudante:"));
+
+            if (idadeEstudante >= 14 && idadeEstudante <= 17) {
+                if (idadeEstudante >= 16) {
+                    interessadosA.push(nomeEstudante);
+                    qtdInteressadosA++;
+                } else {
+                    interessadosB.push(nomeEstudante);
+                    qtdInteressadosB++;
+                }
+                AtualizarContadores();
+                CalcularEquipes();
+            } else {
+                alert("O estudante não atende aos requisitos de idade para participação no campeonato.");
+            }
+        }
+
+        function AtualizarContadores() {
+            var contadorA = document.querySelector('#contadorA');
+            var contadorB = document.querySelector('#contadorB');
+            contadorA.innerHTML = qtdInteressadosA;
+            contadorB.innerHTML = qtdInteressadosB;
+        }
+
+        function CalcularEquipes() {
+            var qtdEquipesA = Math.floor(qtdInteressadosA / 3);
+            var qtdEquipesB = Math.floor(qtdInteressadosB / 3);
+            var paragrafoEquipes = document.querySelector('.equipes');
+            paragrafoEquipes.innerHTML = "Equipes formadas: Classe A: " + qtdEquipesA + ", Classe B: " + qtdEquipesB;
+        }
+    </script>
+</body>
+
+</html>
